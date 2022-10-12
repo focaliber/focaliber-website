@@ -33,6 +33,17 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.HOSTING_PROVIDER_DEPLOY_KEY }}
+          known_hosts: ${{ secrets.HOSTING_PROVIDER_KNOWN_HOSTS }}
+          config: |
+            Host hostingprovider
+              HostName ${{ secrets.HOSTING_PROVIDER_HOSTNAME }}
+              Port ${{ secrets.HOSTING_PROVIDER_PORT_NUMBER }}
+              User ${{ secrets.HOSTING_PROVIDER_USERNAME }}
+
       - name: Take webroot from cache
         uses: actions/cache@v3
         with:
@@ -45,4 +56,13 @@ jobs:
             wp-cli.yml
       
       - name: Deploy on hosting provider
-        run: rsync --version
+        run: |
+          rrsync --recursive --checksum --delete --force --compress --human-readable --verbose \
+          --include='/config/' \
+          --include='/public_html/' \
+          --exclude='/public_html/uploads/' \
+          --include='/vendor/' \
+          --include='/.env' \
+          --include='/wp-cli.yml' \
+          --exclude='/*' \
+          ./ hostingprovider:~/domains/focaliber.nl/

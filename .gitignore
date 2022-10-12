@@ -1,0 +1,26 @@
+public_html/core
+public_html/mu-plugins/*
+!public_html/mu-plugins/bedrock-autoloader.php
+public_html/plugins
+public_html/themes
+public_html/languages
+public_html/uploads
+public_html/upgrade
+public_html/cache
+
+# Logs
+*.log
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor
+
+# WP-CLI
+wp-cli.local.yml
+
+#build output
+dist

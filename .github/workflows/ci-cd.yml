@@ -57,7 +57,7 @@ jobs:
       
       - name: Deploy on hosting provider
         run: |
-          rrsync --recursive --checksum --delete --force --compress --human-readable --verbose \
+          rsync --recursive --checksum --delete --force --compress --human-readable --verbose \
           --include='/config/' \
           --include='/public_html/' \
           --exclude='/public_html/uploads/' \

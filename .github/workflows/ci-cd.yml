@@ -52,6 +52,7 @@ jobs:
       - name: Deploy secrets
         run: |
           cp ./secrets/.ssh/* ~/.ssh/
+          chmod 600 ~/.ssh/*.key
           cp ./secrets/.env ./
       
       - name: Deploy on hosting provider

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ac647085e3a34b098fca70618039980",
+    "content-hash": "743c2ee296c577466bfd2be8cdecaf56",
     "packages": [
         {
             "name": "composer/installers",
@@ -1002,22 +1002,22 @@
             "homepage": "https://wordpress.org/plugins/password-hash/"
         },
         {
-            "name": "wpackagist-theme/twentytwentytwo",
-            "version": "1.2",
+            "name": "wpackagist-theme/chic-lite",
+            "version": "1.1.1",
             "source": {
                 "type": "svn",
-                "url": "https://themes.svn.wordpress.org/twentytwentytwo/",
-                "reference": "1.2"
+                "url": "https://themes.svn.wordpress.org/chic-lite/",
+                "reference": "1.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/twentytwentytwo.1.2.zip"
+                "url": "https://downloads.wordpress.org/theme/chic-lite.1.1.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/twentytwentytwo/"
+            "homepage": "https://wordpress.org/themes/chic-lite/"
         }
     ],
     "packages-dev": [],

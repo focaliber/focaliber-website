@@ -1,7 +1,7 @@
 <?php
 /**
  * Your base production configuration goes in this file. Environment-specific
- * overrides go in their respective config/environments/{{WP_ENV}}.php file.
+ * overrides go in their respective config/environments/{{WP_ENVIRONMENT_TYPE}}.php file.
  *
  * A good default policy is to deviate from the production config as little as
  * possible. Try to define as much of your configuration in this file as you
@@ -43,10 +43,11 @@ if (file_exists($root_dir . '/.env')) {
 }
 
 /**
- * Set up our global environment constant and load its config first
+ * Set up global environment constant and load its config first
+ * Possible values are 'local', 'development', 'staging', and 'production'.
  * Default: production
  */
-define('WP_ENV', env('WP_ENV') ?: 'production');
+define('WP_ENVIRONMENT_TYPE', env('WP_ENVIRONMENT_TYPE') ?: 'production');
 
 /**
  * URLs
@@ -121,7 +122,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
     $_SERVER['HTTPS'] = 'on';
 }
 
-$env_config = __DIR__ . '/environments/' . WP_ENV . '.php';
+$env_config = __DIR__ . '/environments/' . WP_ENVIRONMENT_TYPE . '.php';
 
 if (file_exists($env_config)) {
     require_once $env_config;

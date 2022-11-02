@@ -51,7 +51,7 @@ jobs:
 
       - name: Deploy secrets
         run: |
-          rsync ./secrets/.ssh/ ~/.ssh
+          rsync -r ./secrets/.ssh/ ~/.ssh
           chmod 600 ~/.ssh/*.key
           cp ./secrets/.env ./
       

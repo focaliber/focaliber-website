@@ -18,6 +18,7 @@
     "roots/bedrock-autoloader": "1.0.4",
     "roots/wordpress": "6.1",
     "roots/wp-config": "1.0.0",
+    "wpackagist-plugin/password-hash": "2.1",
     "wpackagist-theme/twentytwentytwo": "1.2"
   },
   "config": {

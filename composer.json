@@ -1,6 +1,6 @@
 {
   "$schema": "https://getcomposer.org/schema.json",
-  "name": "gerwinjansen/focaliber",
+  "name": "focaliber/focaliber-website",
   "description": "The boilerplate for the website of Focaliber",
   "license": "proprietary",
   "repositories": [
@@ -8,6 +8,11 @@
       "type": "composer",
       "url": "https://wpackagist.org",
       "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+    },
+    {
+      "type": "composer",
+      "url": "https://wp-languages.github.io",
+      "only": ["koodimonni-language/*", "koodimonni-plugin-language/*", "koodimonni-theme-language/*"]
     }
   ],
   "require": {
@@ -19,14 +24,16 @@
     "roots/wordpress": "6.1",
     "roots/wp-config": "1.0.0",
     "wpackagist-plugin/password-hash": "2.1",
-    "wpackagist-theme/elsie": "1.0.8"
+    "wpackagist-theme/elsie": "1.0.8",
+    "koodimonni-language/core-nl_nl": "6.1"
   },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
     "allow-plugins": {
       "composer/installers": true,
-      "roots/wordpress-core-installer": true
+      "roots/wordpress-core-installer": true,
+      "koodimonni/composer-dropin-installer": true
     }
   },
   "minimum-stability": "dev",
@@ -35,6 +42,11 @@
     "installer-paths": {
       "public_html/mu-plugins/{$name}/": ["type:wordpress-muplugin", "type:wordpress-plugin"],
       "public_html/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "dropin-paths": {
+      "public_html/languages/": ["vendor:koodimonni-language"],
+      "public_html/languages/plugins/": ["vendor:koodimonni-plugin-language"],
+      "public_html/languages/themes/": ["vendor:koodimonni-theme-language"]
     },
     "wordpress-install-dir": "public_html/core"
   },

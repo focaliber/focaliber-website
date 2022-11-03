@@ -109,7 +109,7 @@ Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
 /**
  * Theme settings
  */
-Config::define('WP_DEFAULT_THEME', 'chic-lite');
+Config::define('WP_DEFAULT_THEME', 'elsie');
 
 /**
  * Debugging Settings

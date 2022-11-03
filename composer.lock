@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "743c2ee296c577466bfd2be8cdecaf56",
+    "content-hash": "0e504b692e16cace3f92457c042af884",
     "packages": [
         {
             "name": "composer/installers",
@@ -1002,22 +1002,22 @@
             "homepage": "https://wordpress.org/plugins/password-hash/"
         },
         {
-            "name": "wpackagist-theme/chic-lite",
-            "version": "1.1.1",
+            "name": "wpackagist-theme/elsie",
+            "version": "1.0.8",
             "source": {
                 "type": "svn",
-                "url": "https://themes.svn.wordpress.org/chic-lite/",
-                "reference": "1.1.1"
+                "url": "https://themes.svn.wordpress.org/elsie/",
+                "reference": "1.0.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/chic-lite.1.1.1.zip"
+                "url": "https://downloads.wordpress.org/theme/elsie.1.0.8.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-theme",
-            "homepage": "https://wordpress.org/themes/chic-lite/"
+            "homepage": "https://wordpress.org/themes/elsie/"
         }
     ],
     "packages-dev": [],

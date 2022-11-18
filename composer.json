@@ -21,7 +21,7 @@
     "vlucas/phpdotenv": "5.5.0",
     "oscarotero/env": "2.1.0",
     "roots/bedrock-autoloader": "1.0.4",
-    "roots/wordpress": "6.1",
+    "roots/wordpress": "6.1.1",
     "roots/wp-config": "1.0.0",
     "wpackagist-plugin/password-hash": "2.1",
     "wpackagist-theme/elsie": "1.0.8",

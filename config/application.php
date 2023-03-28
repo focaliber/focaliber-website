@@ -19,27 +19,25 @@ use function Env\env;
 $root_dir = dirname(__DIR__);
 
 /**
- * Document Root
- *
- * @var string
- */
-$webroot_dir = $root_dir . '/public_html';
-
-/**
  * Use Dotenv to set required environment variables and load .env file in root
  * .env.local will override .env if it exists
  */
-$env_files = file_exists($root_dir . '/.env.local')
-    ? ['.env', '.env.local']
-    : ['.env'];
-
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir, $env_files, false);
-if (file_exists($root_dir . '/.env')) {
-    $dotenv->load();
-    $dotenv->required(['WP_HOME', 'WP_SITEURL']);
-    if (!env('DATABASE_URL')) {
-        $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
+$env_file_paths = [];
+$env_file_names = [];
+foreach (["$root_dir/.env", "$root_dir/.env.local", env('ENV_FILE')] as $env_file) {
+    if(file_exists($env_file)) {
+        $env_file_paths[dirname($env_file)] = dirname($env_file);
+        $env_file_names[basename($env_file)] = basename($env_file);
     }
+}
+
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable($env_file_paths, $env_file_names, false);
+if($env_file_names !== []) {
+    $dotenv->load();
+}
+$dotenv->required(['WP_HOME', 'WP_SITEURL']);
+if (!env('DATABASE_URL')) {
+    $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
 }
 
 /**
@@ -59,7 +57,7 @@ Config::define('WP_SITEURL', env('WP_SITEURL'));
  * Custom Content Directory
  */
 Config::define('CONTENT_DIR', '');
-Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
+Config::define('WP_CONTENT_DIR', WEBROOT_DIR . Config::get('CONTENT_DIR'));
 Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
 
 /**
@@ -139,5 +137,5 @@ Config::apply();
  * Bootstrap WordPress
  */
 if (!defined('ABSPATH')) {
-    define('ABSPATH', $webroot_dir . '/core/');
+    define('ABSPATH', WEBROOT_DIR . '/core/');
 }

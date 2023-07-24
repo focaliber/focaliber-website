@@ -23,7 +23,7 @@
     "roots/bedrock-autoloader": "1.0.4",
     "roots/wordpress": "6.1.1",
     "roots/wp-config": "1.0.0",
-    "wpackagist-plugin/password-hash": "2.1",
+    "wpackagist-plugin/password-hash": "3.0",
     "wpackagist-theme/elsie": "1.0.8",
     "koodimonni-language/core-nl_nl": "6.1.1"
   },

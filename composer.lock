@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dff86dec2fc8fdf0fac2f65e4d5942e",
+    "content-hash": "b9b7a4e6eeb523aad91188d90e266594",
     "packages": [
         {
             "name": "composer/installers",
@@ -1052,15 +1052,15 @@
         },
         {
             "name": "wpackagist-plugin/password-hash",
-            "version": "2.1",
+            "version": "3.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/password-hash/",
-                "reference": "tags/2.1"
+                "reference": "tags/3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/password-hash.2.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/password-hash.3.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

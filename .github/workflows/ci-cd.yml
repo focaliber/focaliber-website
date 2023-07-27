@@ -47,7 +47,8 @@ jobs:
         with:
           repository: focaliber/focaliber-website-secrets
           ref: production
-          ssh-key: ${{ secrets.READ_SECRETS_REPO_KEY }}
+          ssh-key: |
+            ${{ secrets.READ_SECRETS_REPO_KEY }}
           path: './secrets'
 
       - name: Deploy secrets

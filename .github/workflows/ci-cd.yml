@@ -1,6 +1,17 @@
 name: CI/CD
-run-name: CI/CD ${{ github.ref }}
-on: push
+run-name: CI/CD ${{ github.base_ref || github.ref_name }}
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+    branches:
+      - 'master'
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
@@ -20,7 +31,7 @@ jobs:
       - name: Cache webroot
         uses: actions/cache@v3
         with:
-          key: webroot-${{ github.run_number }}.${{ github.run_attempt }}
+          key: webroot-${{ github.run_number }}
           path: |
             config
             public_html
@@ -30,12 +41,15 @@ jobs:
   continuous-deployment:
     needs: continuous-integration
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref_name == 'master' || github.event.label.name == 'deploy_acceptance'
+    environment:
+      name: ${{ github.ref_name == 'master' && 'production' || 'acceptance' }}
+      url: ${{ github.ref_name == 'master' && 'https://www.focaliber.nl' || 'https://acceptatie.focaliber.nl' }}
     steps:
       - name: Take webroot from cache
         uses: actions/cache@v3
         with:
-          key: webroot-${{ github.run_number }}.${{ github.run_attempt }}
+          key: webroot-${{ github.run_number }}
           path: |
             config
             public_html
@@ -46,7 +60,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: focaliber/focaliber-website-secrets
-          ref: production
+          ref: ${{ vars.SECRETS_REPO_BRANCH }}
           ssh-key: ${{ secrets.READ_SECRETS_REPO_KEY }}
           path: './secrets'
 
@@ -66,4 +80,4 @@ jobs:
           --include='/.env' \
           --include='/wp-cli.yml' \
           --exclude='/*' \
-          ./ hostingprovider:~/domains/focaliber.nl/
+          ./ hostingprovider:${{ vars.HOSTING_PROVIDER_WEBROOT }}

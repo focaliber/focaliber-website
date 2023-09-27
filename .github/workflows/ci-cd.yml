@@ -87,7 +87,7 @@ jobs:
       - name: Copy production database and uploads to acceptance
         if: contains( github.event.pull_request.labels.*.name, 'deploy_acceptance')
         run: |
-          rsync --checksum --delete --force --human-readable --verbose ./secrets/.my.cnf hostingprovider:~/
+          rsync --recursive --checksum --delete --force --human-readable --verbose ./secrets/.my.cnf hostingprovider:~/
           ssh hostingprovider "\
             DATABASENAME=`mysql --defaults-group-suffix=production --skip-column-names --batch --execute='select database()'`; \
             mysqldump --defaults-group-suffix=production $DATABASENAME | mysql --defaults-group-suffix=acceptance; \

@@ -5,3 +5,5 @@
 
 use Roots\WPConfig\Config;
 use function Env\env;
+
+Config::define('FORCE_SSL_ADMIN', true);

@@ -3,7 +3,7 @@ run-name: CI/CD ${{ github.base_ref || github.ref_name }}
 on:
   push:
     branches:
-      - 'master'
+      - master
   pull_request:
     types:
       - opened
@@ -11,7 +11,9 @@ on:
       - reopened
       - labeled
     branches:
-      - 'master'
+      - master
+  workflow_dispatch:
+    
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
@@ -41,7 +43,7 @@ jobs:
   continuous-deployment:
     needs: continuous-integration
     runs-on: ubuntu-latest
-    if: github.ref_name == 'master' || github.event.label.name == 'deploy_acceptance'
+    if: github.ref_name == 'master' || contains( github.event.pull_request.labels.*.name, 'deploy_acceptance')
     environment:
       name: ${{ github.ref_name == 'master' && 'production' || 'acceptance' }}
       url: ${{ github.ref_name == 'master' && 'https://www.focaliber.nl' || 'https://acceptatie.focaliber.nl' }}
@@ -67,7 +69,7 @@ jobs:
       - name: Deploy secrets
         run: |
           rsync -r ./secrets/.ssh/ ~/.ssh
-          chmod 600 ~/.ssh/*.key
+          chmod 400 ~/.ssh/*.key
           cp ./secrets/.env ./
       
       - name: Deploy on hosting provider
@@ -81,3 +83,13 @@ jobs:
           --include='/wp-cli.yml' \
           --exclude='/*' \
           ./ hostingprovider:${{ vars.HOSTING_PROVIDER_WEBROOT }}
+
+      - name: Copy production database and uploads to acceptance
+        if: contains( github.event.pull_request.labels.*.name, 'deploy_acceptance')
+        run: |
+          rsync --checksum --delete --force --human-readable --verbose ./secrets/.my.cnf hostingprovider:~/
+          ssh hostingprovider "\
+            DATABASENAME=`mysql --defaults-group-suffix=production --skip-column-names --batch --execute='select database()'`; \
+            mysqldump --defaults-group-suffix=production $DATABASENAME | mysql --defaults-group-suffix=acceptance; \
+            rsync -r ${{ vars.HOSTING_PROVIDER_PRODUCTION_WEBROOT }}/public_html/uploads/ ${{ vars.HOSTING_PROVIDER_WEBROOT }}/public_html/uploads \
+          "

@@ -88,8 +88,8 @@ jobs:
         if: contains( github.event.pull_request.labels.*.name, 'deploy_acceptance')
         run: |
           rsync --checksum --force ./secrets/.my.cnf hostingprovider:~/
-          ssh hostingprovider "\
-            DATABASENAME=`mysql --defaults-group-suffix=production --skip-column-names --batch --execute='select database()'` && \
+          ssh hostingprovider "
+            DATABASENAME=`mysql --defaults-group-suffix=production --skip-column-names --batch --execute='select database()'` &&
             mysqldump --defaults-group-suffix=production $DATABASENAME | mysql --defaults-group-suffix=acceptance &&
-            rsync --checksum --recursive --delete ${{ vars.HOSTING_PROVIDER_PRODUCTION_WEBROOT }}/public_html/uploads/ ${{ vars.HOSTING_PROVIDER_WEBROOT }}/public_html/uploads \
+            rsync --checksum --recursive --delete ${{ vars.HOSTING_PROVIDER_PRODUCTION_WEBROOT }}/public_html/uploads/ ${{ vars.HOSTING_PROVIDER_WEBROOT }}/public_html/uploads
           "

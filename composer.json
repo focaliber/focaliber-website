@@ -25,7 +25,7 @@
     "roots/wp-config": "1.0.0",
     "wpackagist-plugin/password-hash": "3.0",
     "wpackagist-theme/elsie": "1.0.8",
-    "koodimonni-language/core-nl_nl": "6.1.1"
+    "koodimonni-language/core-nl_nl": "6.3.2"
   },
   "config": {
     "optimize-autoloader": true,

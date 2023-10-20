@@ -10,6 +10,14 @@ updates:
       prefix: "Composer"
       include: "scope"
     versioning-strategy: increase
+    groups:
+      wordpress:
+        patterns:
+          - "roots/wordpress"
+          - "koodimonni-language/core-nl_nl"
+      symfony-polyfill:
+        patterns:
+          - "symfony/polyfill*"
 
   - package-ecosystem: "github-actions"
     directory: "/"

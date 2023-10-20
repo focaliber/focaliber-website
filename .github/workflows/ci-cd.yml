@@ -72,11 +72,13 @@ jobs:
           chmod 400 ~/.ssh/*.key
           cp ./secrets/.env ./
       
+      # exclude 'acceptatie' beacuse its a symlink for the subdomain at the hosting provider
       - name: Deploy on hosting provider
         run: |
           rsync --recursive --checksum --delete --force --compress --human-readable --verbose \
           --include='/config/' \
           --include='/public_html/' \
+          --exclude='/public_html/acceptatie/' \
           --exclude='/public_html/uploads/' \
           --include='/vendor/' \
           --include='/.env' \

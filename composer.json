@@ -21,11 +21,11 @@
     "vlucas/phpdotenv": "5.6.0",
     "oscarotero/env": "2.1.0",
     "roots/bedrock-autoloader": "1.0.4",
-    "roots/wordpress": "6.4.3",
+    "roots/wordpress": "6.5",
     "roots/wp-config": "1.0.0",
     "wpackagist-plugin/password-hash": "3.0",
     "wpackagist-theme/elsie": "1.0.8",
-    "koodimonni-language/core-nl_nl": "6.4.3"
+    "koodimonni-language/core-nl_nl": "6.5"
   },
   "config": {
     "optimize-autoloader": true,
